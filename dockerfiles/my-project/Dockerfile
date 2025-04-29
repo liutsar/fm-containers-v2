@@ -1,3 +1,11 @@
 FROM node:20
 
-CMD ["node", "-e", "console.log(\"wow, wowmeow even\")"]
+RUN useradd -ms /bin/bash fenix
+
+USER fenix
+
+WORKDIR /home/fenix/code
+
+COPY --chown=fenix index.js .
+
+CMD ["node", "index.js"]

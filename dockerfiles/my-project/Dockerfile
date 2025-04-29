@@ -6,10 +6,10 @@ USER fenix
 
 WORKDIR /home/fenix/code
 
-COPY --chown=fenix . .
-
-EXPOSE 8080
+COPY --chown=fenix:fenix package*.json ./
 
 RUN npm ci
+
+COPY --chown=fenix . .
 
 CMD ["node", "index.js"]

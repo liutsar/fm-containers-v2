@@ -1,15 +1,13 @@
-FROM node:20
+FROM node:20-alpine
 
-RUN useradd -ms /bin/bash fenix
+USER node
 
-USER fenix
+WORKDIR /home/node/code
 
-WORKDIR /home/fenix/code
-
-COPY --chown=fenix:fenix package*.json ./
+COPY --chown=node:node package*.json ./
 
 RUN npm ci
 
-COPY --chown=fenix . .
+COPY --chown=node . .
 
 CMD ["node", "index.js"]
